@@ -13,7 +13,7 @@ import com.appspring.appspring.modelo.Fornecedor;
 import com.appspring.appspring.repository.FornecedorRepository;
 
 @Controller
-@RequestMapping("/Home/Fornecedor/")
+@RequestMapping("**/Home/Fornecedor/")
 public class FornecedorController {
 
 	@Autowired
@@ -33,7 +33,7 @@ public class FornecedorController {
 			Fornecedor.setDeletado(false);
 			fornecedorRepository.save(Fornecedor);
 			ra.addFlashAttribute("msg", "Fornecedor Cadastrado com Sucesso");		
-			ModelAndView mv = new ModelAndView("redirect:Home/Fornecedor/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:/Home/Fornecedor/Cadastro");
 			return mv;
 		}else {
 			Fornecedor forncedorAtualizar = fornecedorRepository.buscarPorId(Fornecedor.getId());
@@ -41,7 +41,7 @@ public class FornecedorController {
 			forncedorAtualizar.setNome(Fornecedor.getNome());
 			fornecedorRepository.save(forncedorAtualizar);
 			ra.addFlashAttribute("msg", "Fornecedor Atualizado com Sucesso");			
-			ModelAndView mv = new ModelAndView("redirect:Home/Fornecedor/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:/Home/Fornecedor/Cadastro");
 			return mv;
 		}
 	}
@@ -61,7 +61,7 @@ public class FornecedorController {
 		Fornecedor.setDeletado(true);
 		fornecedorRepository.save(Fornecedor);
 		ra.addFlashAttribute("msg", "Fornecedor Deletado com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:Home/Fornecedor/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:/Home/Fornecedor/Cadastro");
 		return mv;
 	}	
 }

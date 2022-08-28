@@ -48,7 +48,7 @@ public class ProdutoController {
 			produto.setDeletado(false);
 			produtoRepository.save(produto);
 			ra.addFlashAttribute("msg", "Produto Cadastrado com Sucesso");		
-			ModelAndView mv = new ModelAndView("redirect:Home/Produto/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
 			return mv;
 		}else {
 			Produto produtoAtualizar = produtoRepository.buscarPorId(produto.getId());
@@ -59,7 +59,7 @@ public class ProdutoController {
 			produtoAtualizar.setFornecedor(produto.getFornecedor());
 			produtoRepository.save(produtoAtualizar);
 			ra.addFlashAttribute("msg", "Produto Atualizado com Sucesso");			
-			ModelAndView mv = new ModelAndView("redirect:Home/Produto/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
 			return mv;
 		}
 	}
@@ -81,7 +81,7 @@ public class ProdutoController {
 		Produto.setDeletado(true);
 		produtoRepository.save(Produto);
 		ra.addFlashAttribute("msg", "Produto Deletado com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:Home/Produto/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
 		return mv;
 	}	
 	

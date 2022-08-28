@@ -24,7 +24,7 @@ import com.appspring.appspring.repository.ProdutoRepository;
 import com.appspring.appspring.repository.VendasRepository;
 
 @Controller
-@RequestMapping("/Home/Vendas/")
+@RequestMapping("**/Home/Vendas/")
 public class VendasController {
 	
 	@Autowired
@@ -88,7 +88,7 @@ public class VendasController {
 		}
 		
 		ra.addFlashAttribute("msg", "Venda Confirmada com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:Home/Vendas/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:/Home/Vendas/Cadastro");
 		return mv;
 		
 	}
@@ -104,7 +104,7 @@ public class VendasController {
 		vendas.setDeletado(true);
 		vendasRepository.save(vendas);
 		ra.addFlashAttribute("msg", "Item deletado com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:Home/Vendas/ListarVendas");
+		ModelAndView mv = new ModelAndView("redirect:/Home/Vendas/ListarVendas");
 		return mv;
 	}
 	

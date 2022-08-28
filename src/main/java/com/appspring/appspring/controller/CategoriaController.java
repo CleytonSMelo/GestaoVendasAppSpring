@@ -14,7 +14,7 @@ import com.appspring.appspring.modelo.Categoria;
 import com.appspring.appspring.repository.CategoriaRepository;
 
 @Controller
-@RequestMapping("/Home/Categoria/")
+@RequestMapping("**/Home/Categoria/")
 public class CategoriaController {
 	
 	@Autowired
@@ -34,7 +34,7 @@ public class CategoriaController {
 			categoria.setDeletado(false);
 			categoriaRepository.save(categoria);
 			ra.addFlashAttribute("msg", "Categoria Cadastrada com Sucesso");		
-			ModelAndView mv = new ModelAndView("redirect:Home/Categoria/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:/Home/Categoria/Cadastro");
 			return mv;
 		}else {
 			Categoria categoraAtualizar = categoriaRepository.buscarPorId(categoria.getId());
@@ -42,7 +42,7 @@ public class CategoriaController {
 			categoraAtualizar.setNome(categoria.getNome());
 			categoriaRepository.save(categoraAtualizar);
 			ra.addFlashAttribute("msg", "Categoria Atualizada com Sucesso");			
-			ModelAndView mv = new ModelAndView("redirect:Home/Categoria/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:/Home/Categoria/Cadastro");
 			return mv;
 		}
 	}
@@ -62,7 +62,7 @@ public class CategoriaController {
 		categoria.setDeletado(true);
 		categoriaRepository.save(categoria);
 		ra.addFlashAttribute("msg", "Categoria Deletada com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:Home/Categoria/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:/Home/Categoria/Cadastro");
 		return mv;
 	}	
 }

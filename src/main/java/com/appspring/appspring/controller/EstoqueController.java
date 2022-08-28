@@ -43,7 +43,7 @@ public class EstoqueController {
 			estoque.setDeletado(false);
 			estoqueRepository.save(estoque);
 			ra.addFlashAttribute("msg", "Produto adicionado ao Estoque com Sucesso");		
-			ModelAndView mv = new ModelAndView("redirect:Home/Estoque/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:/Home/Estoque/Cadastro");
 			return mv;
 		}else {
 			Estoque EstoqueAtualizar = estoqueRepository.buscarPorId(estoque.getId());
@@ -52,7 +52,7 @@ public class EstoqueController {
 			EstoqueAtualizar.setValorVenda(estoque.getValorVenda());
 			estoqueRepository.save(EstoqueAtualizar);
 			ra.addFlashAttribute("msg", "Estoque Atualizado com Sucesso");			
-			ModelAndView mv = new ModelAndView("redirect:Home/Estoque/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:/Home/Estoque/Cadastro");
 			return mv;
 		}
 	}
@@ -73,7 +73,7 @@ public class EstoqueController {
 		estoque.setDeletado(true);
 		estoqueRepository.save(estoque);
 		ra.addFlashAttribute("msg", "Produto Deletado do Estoque com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:Home/Estoque/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:/Home/Estoque/Cadastro");
 		return mv;
 	}
 	
