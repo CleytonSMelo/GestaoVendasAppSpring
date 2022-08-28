@@ -18,7 +18,7 @@ import com.appspring.appspring.repository.EstoqueRepository;
 import com.appspring.appspring.repository.ProdutoRepository;
 
 @RestController
-@RequestMapping("**/Home/Estoque/")
+@RequestMapping("/Home/Estoque/")
 public class EstoqueController {
 
 	@Autowired

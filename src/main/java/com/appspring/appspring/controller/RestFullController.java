@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appspring.appspring.dto.VerificaStringDto;
 
 @RestController
-@RequestMapping("**/api/verificarvogal/")
+@RequestMapping("/api/verificarvogal/")
 public class RestFullController {
 	
 	@GetMapping(value = "{string}" , produces = "application/json")

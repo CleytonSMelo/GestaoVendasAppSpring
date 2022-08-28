@@ -19,7 +19,7 @@ import com.appspring.appspring.repository.ProdutoRepository;
 
 
 @RestController
-@RequestMapping("**/Home/Produto/")
+@RequestMapping("/Home/Produto/")
 public class ProdutoController {
 	
 	@Autowired
