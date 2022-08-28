@@ -19,7 +19,7 @@ import com.appspring.appspring.repository.ProdutoRepository;
 
 
 @RestController
-@RequestMapping("/Home/Produto/")
+@RequestMapping("**/Home/Produto/")
 public class ProdutoController {
 	
 	@Autowired
@@ -34,7 +34,7 @@ public class ProdutoController {
 
 	@GetMapping("Cadastro")
 	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView("/Home/Produto/Cadastro");
+		ModelAndView mv = new ModelAndView("Home/Produto/Cadastro");
 		mv.addObject("produtoobj", new Produto());
 		mv.addObject("produtos", produtoRepository.ListarProdutos());
 		mv.addObject("categorias", categoriaRepository.ListarCategorias());
@@ -48,7 +48,7 @@ public class ProdutoController {
 			produto.setDeletado(false);
 			produtoRepository.save(produto);
 			ra.addFlashAttribute("msg", "Produto Cadastrado com Sucesso");		
-			ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:Home/Produto/Cadastro");
 			return mv;
 		}else {
 			Produto produtoAtualizar = produtoRepository.buscarPorId(produto.getId());
@@ -59,7 +59,7 @@ public class ProdutoController {
 			produtoAtualizar.setFornecedor(produto.getFornecedor());
 			produtoRepository.save(produtoAtualizar);
 			ra.addFlashAttribute("msg", "Produto Atualizado com Sucesso");			
-			ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:Home/Produto/Cadastro");
 			return mv;
 		}
 	}
@@ -67,7 +67,7 @@ public class ProdutoController {
 	@GetMapping("EditarProduto/{idProduto}")
 	public ModelAndView editar(@PathVariable("idProduto") Long idProduto, RedirectAttributes ra) {
 		Produto Produto = produtoRepository.buscarPorId(idProduto);
-		ModelAndView mv = new ModelAndView("/Home/Produto/Cadastro");
+		ModelAndView mv = new ModelAndView("Home/Produto/Cadastro");
 		mv.addObject("produtoobj", Produto);
 		mv.addObject("produtos", produtoRepository.ListarProdutos());
 		mv.addObject("categorias", categoriaRepository.ListarCategorias());
@@ -81,7 +81,7 @@ public class ProdutoController {
 		Produto.setDeletado(true);
 		produtoRepository.save(Produto);
 		ra.addFlashAttribute("msg", "Produto Deletado com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:Home/Produto/Cadastro");
 		return mv;
 	}	
 	

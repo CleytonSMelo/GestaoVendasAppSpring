@@ -22,7 +22,7 @@ public class CategoriaController {
 
 	@GetMapping("Cadastro")
 	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView("/Home/Categoria/Cadastro");
+		ModelAndView mv = new ModelAndView("Home/Categoria/Cadastro");
 		mv.addObject("categoriaobj", new Categoria());
 		mv.addObject("categorias", categoriaRepository.ListarCategorias());
 		return mv;
@@ -34,7 +34,7 @@ public class CategoriaController {
 			categoria.setDeletado(false);
 			categoriaRepository.save(categoria);
 			ra.addFlashAttribute("msg", "Categoria Cadastrada com Sucesso");		
-			ModelAndView mv = new ModelAndView("redirect:/Home/Categoria/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:Home/Categoria/Cadastro");
 			return mv;
 		}else {
 			Categoria categoraAtualizar = categoriaRepository.buscarPorId(categoria.getId());
@@ -42,7 +42,7 @@ public class CategoriaController {
 			categoraAtualizar.setNome(categoria.getNome());
 			categoriaRepository.save(categoraAtualizar);
 			ra.addFlashAttribute("msg", "Categoria Atualizada com Sucesso");			
-			ModelAndView mv = new ModelAndView("redirect:/Home/Categoria/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:Home/Categoria/Cadastro");
 			return mv;
 		}
 	}
@@ -50,7 +50,7 @@ public class CategoriaController {
 	@GetMapping("EditarCategoria/{idCategoria}")
 	public ModelAndView editar(@PathVariable("idCategoria") Long idCategoria, RedirectAttributes ra) {
 		Categoria categoria = categoriaRepository.buscarPorId(idCategoria);
-		ModelAndView mv = new ModelAndView("/Home/Categoria/Cadastro");
+		ModelAndView mv = new ModelAndView("Home/Categoria/Cadastro");
 		mv.addObject("categoriaobj", categoria);
 		mv.addObject("categorias", categoriaRepository.ListarCategorias());
 		return mv;
@@ -62,7 +62,7 @@ public class CategoriaController {
 		categoria.setDeletado(true);
 		categoriaRepository.save(categoria);
 		ra.addFlashAttribute("msg", "Categoria Deletada com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Categoria/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:Home/Categoria/Cadastro");
 		return mv;
 	}	
 }

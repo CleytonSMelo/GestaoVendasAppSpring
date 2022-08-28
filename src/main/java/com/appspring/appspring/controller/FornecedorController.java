@@ -21,7 +21,7 @@ public class FornecedorController {
 
 	@GetMapping("Cadastro")
 	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView("/Home/Fornecedor/Cadastro");
+		ModelAndView mv = new ModelAndView("Home/Fornecedor/Cadastro");
 		mv.addObject("fornecedorobj", new Fornecedor());
 		mv.addObject("fornecedores", fornecedorRepository.ListarFornecedores());
 		return mv;
@@ -33,7 +33,7 @@ public class FornecedorController {
 			Fornecedor.setDeletado(false);
 			fornecedorRepository.save(Fornecedor);
 			ra.addFlashAttribute("msg", "Fornecedor Cadastrado com Sucesso");		
-			ModelAndView mv = new ModelAndView("redirect:/Home/Fornecedor/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:Home/Fornecedor/Cadastro");
 			return mv;
 		}else {
 			Fornecedor forncedorAtualizar = fornecedorRepository.buscarPorId(Fornecedor.getId());
@@ -41,7 +41,7 @@ public class FornecedorController {
 			forncedorAtualizar.setNome(Fornecedor.getNome());
 			fornecedorRepository.save(forncedorAtualizar);
 			ra.addFlashAttribute("msg", "Fornecedor Atualizado com Sucesso");			
-			ModelAndView mv = new ModelAndView("redirect:/Home/Fornecedor/Cadastro");
+			ModelAndView mv = new ModelAndView("redirect:Home/Fornecedor/Cadastro");
 			return mv;
 		}
 	}
@@ -49,7 +49,7 @@ public class FornecedorController {
 	@GetMapping("EditarFornecedor/{idFornecedor}")
 	public ModelAndView editar(@PathVariable("idFornecedor") Long idFornecedor, RedirectAttributes ra) {
 		Fornecedor Fornecedor = fornecedorRepository.buscarPorId(idFornecedor);
-		ModelAndView mv = new ModelAndView("/Home/Fornecedor/Cadastro");
+		ModelAndView mv = new ModelAndView("Home/Fornecedor/Cadastro");
 		mv.addObject("fornecedorobj", Fornecedor);
 		mv.addObject("fornecedores", fornecedorRepository.ListarFornecedores());
 		return mv;
@@ -61,7 +61,7 @@ public class FornecedorController {
 		Fornecedor.setDeletado(true);
 		fornecedorRepository.save(Fornecedor);
 		ra.addFlashAttribute("msg", "Fornecedor Deletado com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Fornecedor/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:Home/Fornecedor/Cadastro");
 		return mv;
 	}	
 }

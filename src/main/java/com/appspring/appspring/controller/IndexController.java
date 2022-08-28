@@ -30,7 +30,7 @@ public class IndexController {
 			int qtdAux = 0;
 			qtd = Long.valueOf(qtdAux);
 		}
-		ModelAndView mv = new ModelAndView("/Home/Dashboard/index");
+		ModelAndView mv = new ModelAndView("Home/Dashboard/index");
 		mv.addObject("totalVendas", vendasRepository.totalVendas());
 		mv.addObject("totalFornecedores", fornecedorRepository.TotalFornecedoresRegistrado());
 		mv.addObject("produtoemEstoque", qtd);

@@ -44,7 +44,7 @@ public class VendasController {
 	@GetMapping("Cadastro")
 	public ModelAndView index() {
 	    listaItens = new ArrayList<Vendas>();
-		ModelAndView mv = new ModelAndView("/Home/Vendas/Cadastro");
+		ModelAndView mv = new ModelAndView("Home/Vendas/Cadastro");
 		mv.addObject("vendasobj", new Vendas());
 		mv.addObject("vendas", listaItens);
 		mv.addObject("estoque", estoqueRepository.ListarEstoque());
@@ -53,7 +53,7 @@ public class VendasController {
 	
 	@GetMapping("ListarVendas")
 	public ModelAndView ListarVendas() {
-		ModelAndView mv = new ModelAndView("/Home/Vendas/ListarVendas");
+		ModelAndView mv = new ModelAndView("Home/Vendas/ListarVendas");
 		mv.addObject("vendas", vendasRepository.ListarVendas());
 		return mv;
 	}
@@ -61,7 +61,7 @@ public class VendasController {
 	@PostMapping("AddItens")
 	public ModelAndView adicionarItens(Vendas vendas) {
 		listaItens.add(vendas);
-		ModelAndView mv = new ModelAndView("/Home/Vendas/Cadastro");
+		ModelAndView mv = new ModelAndView("Home/Vendas/Cadastro");
 		mv.addObject("vendasobj", new Vendas());
 		mv.addObject("vendas", listaItens);
 		mv.addObject("estoque", estoqueRepository.ListarEstoque());
@@ -88,7 +88,7 @@ public class VendasController {
 		}
 		
 		ra.addFlashAttribute("msg", "Venda Confirmada com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Vendas/Cadastro");
+		ModelAndView mv = new ModelAndView("redirect:Home/Vendas/Cadastro");
 		return mv;
 		
 	}
@@ -104,7 +104,7 @@ public class VendasController {
 		vendas.setDeletado(true);
 		vendasRepository.save(vendas);
 		ra.addFlashAttribute("msg", "Item deletado com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Vendas/ListarVendas");
+		ModelAndView mv = new ModelAndView("redirect:Home/Vendas/ListarVendas");
 		return mv;
 	}
 	
@@ -121,7 +121,7 @@ public class VendasController {
 			categoriaDto.add(c);
 		}
 		
-		ModelAndView mv = new ModelAndView("/Home/Vendas/Relatorio");
+		ModelAndView mv = new ModelAndView("Home/Vendas/Relatorio");
 		mv.addObject("categorias", categoriaDto);
 		mv.addObject("produtos", listaprodutos);
 		mv.addObject("fornecedores", listafornecedores);
