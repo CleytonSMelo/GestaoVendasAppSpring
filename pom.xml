@@ -11,8 +11,8 @@
 	<groupId>com.appspring</groupId>
 	<artifactId>appspring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AppLojaVirtual</name>
-	<description>Loja Virtual em Spring Boot</description>
+	<name>AppSpring</name>
+	<description>AppSpring Gestao Vendas em Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

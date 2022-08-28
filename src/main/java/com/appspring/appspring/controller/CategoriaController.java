@@ -14,7 +14,7 @@ import com.appspring.appspring.modelo.Categoria;
 import com.appspring.appspring.repository.CategoriaRepository;
 
 @Controller
-@RequestMapping("/Home/Categoria/")
+@RequestMapping("**/Home/Categoria/")
 public class CategoriaController {
 	
 	@Autowired

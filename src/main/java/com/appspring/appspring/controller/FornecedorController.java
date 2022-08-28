@@ -13,7 +13,7 @@ import com.appspring.appspring.modelo.Fornecedor;
 import com.appspring.appspring.repository.FornecedorRepository;
 
 @Controller
-@RequestMapping("/Home/Fornecedor/")
+@RequestMapping("**/Home/Fornecedor/")
 public class FornecedorController {
 
 	@Autowired

@@ -24,7 +24,7 @@ import com.appspring.appspring.repository.ProdutoRepository;
 import com.appspring.appspring.repository.VendasRepository;
 
 @Controller
-@RequestMapping("/Home/Vendas/")
+@RequestMapping("**/Home/Vendas/")
 public class VendasController {
 	
 	@Autowired
