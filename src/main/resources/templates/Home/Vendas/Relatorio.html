@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymelaef.org"
+	xmlns:sec="http://www.thymelaef.org/extras/spring-security">
+
+<div th:insert="Fragmentos/BarraNavegacao :: headerPagel"></div>  
+
+<title>Relatorio</title>
+
+<body id="page-top">
+   <!-- Page Wrapper -->
+   <div id="wrapper">
+   
+    <div class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" style="background-image: none;" id="accordionSidebar">
+     <!-- Sidebar lateral Fragmento-->
+     <div th:insert="Fragmentos/BarraNavegacao :: navbar"></div>
+   </div>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                       
+               <!-- Navebar Top page Fragmento-->
+               <div th:insert="Fragmentos/BarraNavegacao :: navbar2"></div>
+               
+                <!-- Inicio do conteudo da pagina -->
+                <div class="container-fluid">
+				 
+				<div id="tabelas">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" style="text-align : center; font-size: 20px;">Categorias e Quantidade Total de Produto em Estoque</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="categoria" class="table table-bordered"  width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>                                                                                   
+                                            <th style="text-align : center;">Categoria</th>                                           
+                                            <th style="text-align : center;">Total de Produto em Estoque</th>
+                                         
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+										<tr th:each="categoria : ${categorias}">
+											<td style="text-align : center;" th:text="${categoria.nome}"></td>
+											<td style="text-align : center;" th:text="${categoria.qtdEstoque}"></td>
+																				
+											
+										</tr>
+									</tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" style="text-align : center; font-size: 20px;">Produtos sem Estoque</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="categoria" class="table table-bordered"  width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>                                                                                   
+                                            <th style="text-align : center;">Produtos</th>                                           
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+										<tr th:each="produto : ${produtos}">
+											<td style="text-align : center;" th:text="${produto}"></td>										
+										</tr>
+									</tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" style="text-align : center; font-size: 20px;">Fornecedores sem Produtos em Estoque</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="categoria" class="table table-bordered"  width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>                                                                                   
+                                            <th style="text-align : center;">Fornecedores</th>                                                                                  
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+										<tr th:each="fornecedor : ${fornecedores}">
+											<td style="text-align : center;" th:text="${fornecedor}"></td>																				
+										</tr>
+									</tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   </div>
+                    
+                    <div>
+                    	<button id="b_print" name="b_print" type="button" class="btn btn-primary " style="float: right;" onClick="printdiv('tabelas');" value=" Imprimir " >Imprimir</button>
+                    </div>
+               
+               
+               </div>
+            </div>
+              
+                     
+              
+           <!-- CopyRight Fragmento-->
+           <div th:insert="Fragmentos/BarraNavegacao :: copyrig"></div>
+    
+   </div>
+</div>
+<!-- Scroll to Top Button + Modal logout fragmento-->
+<div th:insert="Fragmentos/BarraNavegacao :: topPageModal"></div>
+    <script th:src="@{/js/vendas/relatorio.js}"></script>
+</body>
+</html>

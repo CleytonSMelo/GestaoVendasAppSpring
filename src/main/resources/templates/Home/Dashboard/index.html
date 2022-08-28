@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymelaef.org"
+	xmlns:sec="http://www.thymelaef.org/extras/spring-security">
+	
+<div th:insert="Fragmentos/BarraNavegacao :: headerPagel"></div> 
+<title>Dashboard</title>
+
+<body id="page-top">
+     <!-- Page Wrapper -->
+     <div id="wrapper">
+       
+     <div class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" style="background-image: none;" id="accordionSidebar">
+       <!-- Sidebar lateral Fragmento-->
+       <div th:insert="Fragmentos/BarraNavegacao :: navbar"></div>
+     </div>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+               <!-- Navebar Top page Fragmento-->
+               <div th:insert="Fragmentos/BarraNavegacao :: navbar2"></div>
+               
+                <!-- Inicio do conteudo da pagina -->
+                <div class="container-fluid">
+                
+                <c th:if="${msgErro != null}">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert">
+						<strong><span th:text="${msgErro}"></span></strong> 
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				 </c>
+                 
+                <c th:if="${msg != null}">
+					<div class="alert alert-success alert-dismissible fade show"
+						role="alert">
+						<strong><span th:text="${msg}"></span></strong> 
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				 </c>
+                
+                  <h1 class="h3 mb-2 text-gray-800">Informações</h1>
+                    
+					<div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <a th:href="@{Home/Vendas/Cadastro}">Total de Vendas Efetuadas</a></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span th:text="${totalVendas}"></span></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-tasks fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <a th:href="@{Home/Estoque/Cadastro}">Total de Produtos em Estoque</a></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span th:text="${produtoemEstoque}"></span></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-tasks fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <a th:href="@{Home/Fornecedor/Cadastro}">Total de Fornecedores Registrado</a></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span th:text="${totalFornecedores}"></span></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-tasks fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                 					          
+                    
+				</div>
+            </div>
+              
+               <!-- CopyRight Fragmento-->
+               <div th:insert="Fragmentos/BarraNavegacao :: copyrig"></div>
+                  
+   </div>
+</div>
+<!-- Scroll to Top Button + Modal logout fragmento-->
+<div th:insert="Fragmentos/BarraNavegacao :: topPageModal"></div>
+    
+</body>
+</html>

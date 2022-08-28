@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymelaef.org"
+	xmlns:sec="http://www.thymelaef.org/extras/spring-security">
+	
+<head th:fragment="headerPagel">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" media="screen">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link th:href="@{/meucss/css/sb-admin-2.min.css}" rel="stylesheet">
+<link th:href="@{/meucss/css/basico.css}" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+
+<!-- Para ajustar imagem do logo -->
+<style type="text/css">
+</style>
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:fragment="navbar">
+			<!-- Sidebar -->
+			<ul
+				class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+				style="background-image: none" id="accordionSidebar">
+
+				<!-- Sidebar - Brand -->
+				<a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
+					<div class="sidebar-brand-icon rotate-n-15 rotacao">
+						<img th:src="@{/img/appspring.png}" class="img3">
+					</div>
+					<div class="sidebar-brand-text mx-3 mrg">
+						<img th:src="@{/img/LogoAppSpring.png}" class="img2">
+					</div>
+				</a>
+
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
+
+				<!-- Nav Item - Dashboard -->
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}">
+						<i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
+				</a></li>
+
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item"><a class="nav-link collapsed" href="#"
+					data-toggle="collapse" data-target="#collapseCategoria"
+					aria-expanded="true" aria-controls="collapseCategoria"> <i
+						class="fas fa-fw fa-circle"></i> <span>Categorias</span>
+				</a>
+					<div id="collapseCategoria" class="collapse"
+						aria-labelledby="headingCategoria" data-parent="#accordionSidebar">
+						<div id="categoria" class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" th:href="@{/Home/Categoria/Cadastro}">Cadastro</a>
+						</div>
+					</div></li>
+					
+				<li class="nav-item"><a class="nav-link collapsed" href="#"
+					data-toggle="collapse" data-target="#collapseEstoque"
+					aria-expanded="true" aria-controls="collapseEstoque"> <i
+						class="fas fa-fw fa-circle"></i> <span>Estoque</span>
+				</a>
+					<div id="collapseEstoque" class="collapse"
+						aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" th:href="@{/Home/Estoque/Cadastro}">Cadastro</a>							
+						</div>
+					</div></li>	
+					
+				<li class="nav-item"><a class="nav-link collapsed" href="#"
+					data-toggle="collapse" data-target="#collapseFornecedor"
+					aria-expanded="true" aria-controls="collapseFornecedor"> <i
+						class="fas fa-fw fa-circle"></i> <span>Fornecedor</span>
+				</a>
+					<div id="collapseFornecedor" class="collapse"
+						aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" th:href="@{/Home/Fornecedor/Cadastro}">Cadastro</a>							
+						</div>
+					</div></li>	
+
+				<li class="nav-item"><a class="nav-link collapsed" href="#"
+					data-toggle="collapse" data-target="#collapseProduto"
+					aria-expanded="true" aria-controls="collapseProduto"> <i
+						class="fas fa-fw fa-circle"></i> <span>Produtos</span>
+				</a>
+					<div id="collapseProduto" class="collapse"
+						aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" th:href="@{/Home/Produto/Cadastro}">Cadastro</a>							
+						</div>
+					</div></li>
+					
+				<li class="nav-item"><a class="nav-link collapsed" href="#"
+					data-toggle="collapse" data-target="#collapseVendas"
+					aria-expanded="true" aria-controls="collapseVendas"> <i
+						class="fas fa-fw fa-circle"></i> <span>Vendas</span>
+				</a>
+					<div id="collapseVendas" class="collapse"
+						aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" th:href="@{/Home/Vendas/Cadastro}">Cadastro</a>
+							<a class="collapse-item" th:href="@{/Home/Vendas/ListarVendas}">Lista de Vendas</a>	
+							<a class="collapse-item" th:href="@{/Home/Vendas/Relatorio}">Relatorio</a>							
+						</div>
+					</div></li>
+
+				<!-- Divider -->
+				<hr class="sidebar-divider d-none d-md-block">
+
+				<!-- Sidebar Toggler (Sidebar) -->
+				<div class="text-center d-none d-md-inline">
+					<button class="rounded-circle border-0" id="sidebarToggle"></button>
+				</div>
+			</ul>
+		</div>
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+				<div th:fragment="navbar2">
+					<!-- Topbar -->
+					<nav
+						class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
+
+						<!-- Sidebar Toggle (Topbar) -->
+						<button id="sidebarToggleTop"
+							class="btn btn-link d-md-none rounded-circle mr-3">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<!-- Topbar Navbar -->
+						<ul class="navbar-nav ml-auto">
+
+							<!-- Nav Item - Search Dropdown (Visible Only XS) -->
+							<li class="nav-item dropdown no-arrow d-sm-none"><a
+								class="nav-link dropdown-toggle" href="#" id="searchDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i class="fas fa-search fa-fw"></i>
+							</a> <!-- Dropdown - Messages -->
+								<div
+									class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+									aria-labelledby="searchDropdown">
+									<form class="form-inline mr-auto w-100 navbar-search">
+										<div class="input-group">
+											<input type="text"
+												class="form-control bg-light border-0 small"
+												placeholder="Search for..." aria-label="Search"
+												aria-describedby="basic-addon2">
+											<div class="input-group-append">
+												<button class="btn btn-primary" type="button">
+													<i class="fas fa-search fa-sm"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div></li>							
+						</ul>
+
+					</nav>
+					<!-- End of Topbar -->
+				</div>
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid"></div>
+				<!-- /.container-fluid -->
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:fragment="copyrig">
+				<!-- Footer -->
+				<footer class="sticky-footer bg-white">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Copyright &copy; AppSpring 2022</span>
+						</div>
+					</div>
+				</footer>
+				<!-- End of Footer -->
+			</div>
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<div th:fragment="topPageModal">
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded" href="#page-top"> <i
+			class="fas fa-angle-up"></i>
+		</a>
+
+		<!-- Logout Modal-->
+		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Sair do
+							Sistema</h5>
+						<button class="close" type="button" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">Selecione "Logout" abaixo para
+						encerrar à sua sessão atual.</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button"
+							data-dismiss="modal">Cancel</button>
+						<a class="btn btn-primary" th:href="@{/Home/logout}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Bootstrap core JavaScript-->
+		<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+		<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+		<script th:src="@{/js/sb-admin-2.min.js}"></script>
+		<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+        <script th:src="@{/js/geral/lista.js}"></script>      
+
+	</div>
+</body>
+</html>
