@@ -38,6 +38,20 @@
 	   if (tecla == 46) { if (indexvir !== -1 || indexpon !== -1) {return false} }
 	}
     
+    function keypressed2( obj , e ) {
+	    var tecla = ( window.event ) ? e.keyCode : e.which;
+	    var texto = document.getElementById("valorVenda").value
+	    var indexvir = texto.indexOf(",")
+	    var indexpon = texto.indexOf(".")
+	   
+	   if ( tecla == 8 || tecla == 0 )
+	       return true;
+	   if ( tecla != 44 && tecla != 46 && tecla < 48 || tecla > 57 )
+	       return false;
+	   if (tecla == 44) { if (indexvir !== -1 || indexpon !== -1) {return false} }
+	   if (tecla == 46) { if (indexvir !== -1 || indexpon !== -1) {return false} }
+	}
+    
     var somenteNumeros = function(event) {
 		  return ((event.charCode >= 48 && event.charCode <= 57))
 	}
