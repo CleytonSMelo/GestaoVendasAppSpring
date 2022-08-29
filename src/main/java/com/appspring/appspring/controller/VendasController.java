@@ -39,14 +39,12 @@ public class VendasController {
 	@Autowired
 	private FornecedorRepository fornecedorRepository;
 	
-	List<Vendas> listaItens = new ArrayList<Vendas>();
 	
 	@GetMapping("Cadastro")
-	public ModelAndView index() {
-	    listaItens = new ArrayList<Vendas>();
+	public ModelAndView cadastro() {
 		ModelAndView mv = new ModelAndView("Home/Vendas/Cadastro");
 		mv.addObject("vendasobj", new Vendas());
-		mv.addObject("vendas", listaItens);
+		mv.addObject("vendas", vendasRepository.ListarVendas());
 		mv.addObject("estoque", estoqueRepository.ListarEstoque());
 		return mv;
 	}
@@ -58,43 +56,27 @@ public class VendasController {
 		return mv;
 	}
 	
-	@PostMapping("AddItens")
-	public ModelAndView adicionarItens(Vendas vendas) {
-		listaItens.add(vendas);
-		ModelAndView mv = new ModelAndView("Home/Vendas/Cadastro");
-		mv.addObject("vendasobj", new Vendas());
-		mv.addObject("vendas", listaItens);
-		mv.addObject("estoque", estoqueRepository.ListarEstoque());
-		return mv;
-	}
-	
 	@PostMapping("Salvar")
-	public ModelAndView salvar(RedirectAttributes ra) {
+	public ModelAndView salvar(Vendas venda ,RedirectAttributes ra) {
 		Long total = vendasRepository.totalVendas();
 		String codVenda = "VEN" + LocalDate.now().getYear() + total;
-		for(Vendas v : listaItens) {
-			Vendas vendas = new Vendas();
-			vendas.setCodVenda(codVenda);
-			vendas.setDeletado(false);
-			vendas.setEstoque(v.getEstoque());
-			vendas.setProduto(v.getProduto());
-			vendas.setQuantidade(v.getQuantidade());
-			vendas.setValorVenda((v.getValorVenda() * v.getQuantidade()));
-			Vendas venda = vendasRepository.save(vendas);
+		
+		venda.setCodVenda(codVenda);
+		venda.setDeletado(false);	
+		venda.setValorVenda((venda.getValorVenda() * venda.getQuantidade()));
+		Vendas v = vendasRepository.save(venda);
 			
-			Estoque estoque = estoqueRepository.buscarPorId(v.getEstoque().getId());
-			estoque.setQuantidade((estoque.getQuantidade()-venda.getQuantidade()));
-			estoqueRepository.save(estoque);
-		}
+		Estoque estoque = estoqueRepository.buscarPorId(v.getEstoque().getId());
+		estoque.setQuantidade((estoque.getQuantidade()-venda.getQuantidade()));
+		estoqueRepository.save(estoque);
 		
-		ra.addFlashAttribute("msg", "Venda Confirmada com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Vendas/Cadastro");
-		return mv;
-		
+		ra.addFlashAttribute("msg", "Venda Efetuada com Sucesso");		
+		ModelAndView mv = new ModelAndView("redirect:/Home/Vendas/ListarVendas");
+		return mv;		
 	}
+		
 	
-	
-	@GetMapping("DeletarItem/{idVendas}")
+	@GetMapping("Deletar/{idVendas}")
 	public ModelAndView deletar(@PathVariable("idVendas") Long idVendas, RedirectAttributes ra) {
 		Vendas vendas = vendasRepository.buscarPorId(idVendas);
 		Estoque estoque = estoqueRepository.buscarPorId(vendas.getEstoque().getId());

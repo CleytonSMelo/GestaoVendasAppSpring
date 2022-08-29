@@ -29,7 +29,7 @@ public class EstoqueController {
 	
 
 	@GetMapping("Cadastro")
-	public ModelAndView index() {
+	public ModelAndView cadastro() {
 		ModelAndView mv = new ModelAndView("Home/Estoque/Cadastro");
 		mv.addObject("estoqueobj", new Estoque());
 		mv.addObject("estoque", estoqueRepository.ListarEstoque());

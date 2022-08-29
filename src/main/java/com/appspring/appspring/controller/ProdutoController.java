@@ -33,7 +33,7 @@ public class ProdutoController {
 	
 
 	@GetMapping("Cadastro")
-	public ModelAndView index() {
+	public ModelAndView cadastro() {
 		ModelAndView mv = new ModelAndView("Home/Produto/Cadastro");
 		mv.addObject("produtoobj", new Produto());
 		mv.addObject("produtos", produtoRepository.ListarProdutos());
@@ -92,7 +92,6 @@ public class ProdutoController {
 			return new ResponseEntity<Produto>(produto, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<Produto>(HttpStatus.BAD_REQUEST);
-		}
-		
+		}	
 	}
 }

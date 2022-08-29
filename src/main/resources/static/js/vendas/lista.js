@@ -4,8 +4,7 @@ buscarproduto(idProduto);
 
 $('#estoque').change(function(event) {
 	var id = $(this).find(':selected').attr('id-estoque');
-	buscarproduto(id);
-	
+	buscarproduto(id);	
 });
 
 function buscarproduto(id) {
@@ -15,7 +14,6 @@ function buscarproduto(id) {
 		type : 'GET',
 		url : url
 	}).done(function(data) {
-		//console.log(data);
 		if (data != null) {
 			$("#categoria2").val(data.produto.categoria.nome);
 			$("#fornecedor").val(data.produto.fornecedor.nome);
@@ -57,17 +55,16 @@ $("#quantidadeselecionado").keyup(function(event) {
 	}
 });
 
-function printdiv(printpage){
-var headstr = "<html><head><title></title></head><body>";
-var footstr = "</body>";
-var newstr = document.all.item(printpage).innerHTML;
-var oldstr = document.body.innerHTML;
-document.body.innerHTML = headstr+newstr+footstr;
+function printdiv(printpage) {
+	var headstr = "<html><head><title></title></head><body>";
+	var footstr = "</body>";
+	var newstr = document.all.item(printpage).innerHTML;
+	var oldstr = document.body.innerHTML;
+	document.body.innerHTML = headstr + newstr + footstr;
 
-window.print(); 
-document.body.innerHTML = oldstr;
-return false;
-
+	window.print();
+	document.body.innerHTML = oldstr;
+	return false;
 }
 
 

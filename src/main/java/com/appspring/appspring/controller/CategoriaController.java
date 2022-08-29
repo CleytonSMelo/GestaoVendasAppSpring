@@ -21,7 +21,7 @@ public class CategoriaController {
 	private CategoriaRepository categoriaRepository;
 
 	@GetMapping("Cadastro")
-	public ModelAndView index() {
+	public ModelAndView cadastro() {
 		ModelAndView mv = new ModelAndView("Home/Categoria/Cadastro");
 		mv.addObject("categoriaobj", new Categoria());
 		mv.addObject("categorias", categoriaRepository.ListarCategorias());

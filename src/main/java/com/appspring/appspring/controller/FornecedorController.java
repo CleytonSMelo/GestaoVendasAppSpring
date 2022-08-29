@@ -20,7 +20,7 @@ public class FornecedorController {
 	private FornecedorRepository fornecedorRepository;
 
 	@GetMapping("Cadastro")
-	public ModelAndView index() {
+	public ModelAndView cadastro() {
 		ModelAndView mv = new ModelAndView("Home/Fornecedor/Cadastro");
 		mv.addObject("fornecedorobj", new Fornecedor());
 		mv.addObject("fornecedores", fornecedorRepository.ListarFornecedores());
