@@ -1,6 +1,6 @@
 function printdiv(printpage){
-var headstr = "<div>";
-var footstr = "</div>";
+var headstr = "<html><head><title></title></head><body><div>";
+var footstr = "</div></body>";
 var newstr = document.all.item(printpage).innerHTML;
 var oldstr = document.body.innerHTML;
 document.body.innerHTML = headstr+newstr+footstr;
