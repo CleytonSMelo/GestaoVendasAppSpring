@@ -40,7 +40,7 @@ function buscarproduto(id) {
 $("#btnAdd").attr('disabled', true);
 
 function verificarQtd(){
-	if($("#quantidade").val() != "0" ){
+	if($("#quantidade").val() != "0"){
 		$("#btnAdd").attr('disabled', false);
 	}else{
 		$("#btnAdd").attr('disabled', true);
@@ -48,7 +48,7 @@ function verificarQtd(){
 }
 
 $("#quantidadeselecionado").keyup(function(event) {
-	if($(this).val() == 0 || $("#quantidade").val() == "0"){
+	if($(this).val() == 0 || $("#quantidade").val() == "0" || $(this).val() > $("#quantidade").val()){
 		$("#btnAdd").attr('disabled', true);
 	}else{
 		$("#btnAdd").attr('disabled', false);
