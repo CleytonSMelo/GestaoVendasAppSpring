@@ -68,7 +68,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="inputNome">Qtd. em Estoque </label> <input type="text"
-									class="form-control" id="quantidade" placeholder="0"  readonly="readonly">
+									class="form-control" id="quantidade" placeholder="0" value="" readonly="readonly">
 							</div>
 							
 							<div class="form-group col-md-4">
@@ -78,7 +78,7 @@
 							
 							<div class="form-group col-md-4">
 								<label for="inputNome">Qtd. Selecionado</label> <input type="text"
-									class="form-control" id="quantidadeselecionado" placeholder="0" name="quantidade" th:field="*{Quantidade}" required="required" th:onkeypress="return somenteNumeros(event)">
+									class="form-control" id="selecionadoquantidade" placeholder="0" name="quantidade" th:field="*{Quantidade}" value="" required="required" th:onkeypress="return somenteNumeros(event)">
 							</div>
 						</div>
 
