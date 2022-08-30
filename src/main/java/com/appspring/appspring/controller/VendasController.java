@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.appspring.appspring.ReportUtil;
 import com.appspring.appspring.dto.CategoriaDto;
-import com.appspring.appspring.modelo.Estoque;
-import com.appspring.appspring.modelo.Fornecedor;
-import com.appspring.appspring.modelo.Produto;
+import com.appspring.appspring.dto.RelatorioVendasDto;
 import com.appspring.appspring.modelo.Vendas;
 import com.appspring.appspring.repository.EstoqueRepository;
 import com.appspring.appspring.repository.FornecedorRepository;
@@ -27,6 +29,21 @@ import com.appspring.appspring.service.VendasService;
 @Controller
 @RequestMapping("**/Home/Vendas/")
 public class VendasController {
+	
+	@Autowired
+	private VendasRepository vendasRepository;
+
+	@Autowired
+	private EstoqueRepository estoqueRepository;
+
+	@Autowired
+	private ProdutoRepository produtoRepository;
+
+	@Autowired
+	private FornecedorRepository fornecedorRepository;
+
+	@Autowired
+	private ReportUtil reports;
 		
 	private final VendasService vendasService;
 	
@@ -65,5 +82,4 @@ public class VendasController {
 		return mv;
 	}
 	
-
 }

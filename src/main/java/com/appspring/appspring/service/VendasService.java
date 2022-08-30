@@ -119,13 +119,15 @@ public class VendasService {
 		relatorio = converterObjetoParaRelatorio(fornecedores, produtos, categoriaobj);
 
 		if (!relatorio.isEmpty()) {
-			byte[] pdf = reports.gerarRelatorio(relatorio, "RelatorioVendasGeral", request.getServletContext());
+			byte[] pdf = reports.gerarRelatorio(relatorio, "RelatorioVendas", request.getServletContext());
 			response.setContentLength(pdf.length);
 			response.setContentType("application/pdf");
 			String headkey = "Content-Disposition";
-			String headvalue = String.format("inline; filename=\"RelatorioVendasGeral.pdf\"");
+			String headvalue = String.format("inline; filename=\"RelatorioVendas.pdf\"");
 			response.setHeader(headkey, headvalue);
 			response.getOutputStream().write(pdf);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
 		} else {
 			ra.addFlashAttribute("msgAlert", "Nenhum Registro encontrado");
 			ModelAndView modelAndView = new ModelAndView("redirect:/Home/Vendas/Relatorio");
@@ -135,7 +137,7 @@ public class VendasService {
 	}
 
 	private List<RelatorioVendasDto> converterObjetoParaRelatorio(List<String> Fornecedores, List<String> produto,
-			List<Object[]> categoriaobj) {
+		List<Object[]> categoriaobj) {
 		List<RelatorioVendasDto> relatorioVendasDto = new ArrayList<>();
 		List<CategoriaDto> catDto = new ArrayList<CategoriaDto>();
 		for (Object[] obj : categoriaobj) {
@@ -150,4 +152,5 @@ public class VendasService {
 
 		return relatorioVendasDto;
 	}
+
 }
