@@ -16,79 +16,49 @@ import com.appspring.appspring.modelo.Produto;
 import com.appspring.appspring.repository.CategoriaRepository;
 import com.appspring.appspring.repository.FornecedorRepository;
 import com.appspring.appspring.repository.ProdutoRepository;
+import com.appspring.appspring.service.ProdutoService;
 
 
 @RestController
 @RequestMapping("**/Home/Produto/")
 public class ProdutoController {
 	
-	@Autowired
-	private ProdutoRepository produtoRepository;
+	private final ProdutoService produtoService;
+	
 	
 	@Autowired
-	private FornecedorRepository fornecedorRepository;
-	
-	@Autowired
-	private CategoriaRepository categoriaRepository;
-	
+	public ProdutoController(ProdutoService produtoService) {
+		this.produtoService = produtoService;
+	}
 
 	@GetMapping("Cadastro")
 	public ModelAndView cadastro() {
-		ModelAndView mv = new ModelAndView("Home/Produto/Cadastro");
-		mv.addObject("produtoobj", new Produto());
-		mv.addObject("produtos", produtoRepository.ListarProdutos());
-		mv.addObject("categorias", categoriaRepository.ListarCategorias());
-		mv.addObject("fornecedores", fornecedorRepository.ListarFornecedores());
+		ModelAndView mv = produtoService.CadastroProduto();
 		return mv;
 	}
 	
 	@PostMapping("Salvar")
 	public ModelAndView salvar(Produto produto, RedirectAttributes ra) {
-		if (produto.getId() == 0) {
-			produto.setDeletado(false);
-			produtoRepository.save(produto);
-			ra.addFlashAttribute("msg", "Produto Cadastrado com Sucesso");		
-			ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
-			return mv;
-		}else {
-			Produto produtoAtualizar = produtoRepository.buscarPorId(produto.getId());
-			produtoAtualizar.setDeletado(produtoAtualizar.getDeletado());
-			produtoAtualizar.setNome(produto.getNome());
-			produtoAtualizar.setValorCompra(produto.getValorCompra());
-			produtoAtualizar.setCategoria(produto.getCategoria());
-			produtoAtualizar.setFornecedor(produto.getFornecedor());
-			produtoRepository.save(produtoAtualizar);
-			ra.addFlashAttribute("msg", "Produto Atualizado com Sucesso");			
-			ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
-			return mv;
-		}
+		ModelAndView mv = produtoService.SalvarProduto(produto, ra);
+		return mv;
 	}
 	
 	@GetMapping("EditarProduto/{idProduto}")
 	public ModelAndView editar(@PathVariable("idProduto") Long idProduto, RedirectAttributes ra) {
-		Produto Produto = produtoRepository.buscarPorId(idProduto);
-		ModelAndView mv = new ModelAndView("Home/Produto/Cadastro");
-		mv.addObject("produtoobj", Produto);
-		mv.addObject("produtos", produtoRepository.ListarProdutos());
-		mv.addObject("categorias", categoriaRepository.ListarCategorias());
-		mv.addObject("fornecedores", fornecedorRepository.ListarFornecedores());
+		ModelAndView mv = produtoService.EditarProduto(idProduto, ra);
 		return mv;
 	}
 	
 	@GetMapping("DeletarProduto/{idProduto}")
 	public ModelAndView deletar(@PathVariable("idProduto") Long idProduto, RedirectAttributes ra) {
-		Produto Produto = produtoRepository.buscarPorId(idProduto);
-		Produto.setDeletado(true);
-		produtoRepository.save(Produto);
-		ra.addFlashAttribute("msg", "Produto Deletado com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Produto/Cadastro");
+		ModelAndView mv = produtoService.DeletarProduto(idProduto, ra);
 		return mv;
 	}	
 	
 	@GetMapping(value = "{id}" , produces = "application/json")
 	public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable(value = "id")Long id) {
 		if (id != null) {
-			Produto produto = produtoRepository.buscarPorId(id);	
+			Produto produto = produtoService.buscaProdutoPorId(id);
 			return new ResponseEntity<Produto>(produto, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<Produto>(HttpStatus.BAD_REQUEST);

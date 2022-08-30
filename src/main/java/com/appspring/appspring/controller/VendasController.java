@@ -22,91 +22,46 @@ import com.appspring.appspring.repository.EstoqueRepository;
 import com.appspring.appspring.repository.FornecedorRepository;
 import com.appspring.appspring.repository.ProdutoRepository;
 import com.appspring.appspring.repository.VendasRepository;
+import com.appspring.appspring.service.VendasService;
 
 @Controller
 @RequestMapping("**/Home/Vendas/")
 public class VendasController {
+		
+	private final VendasService vendasService;
 	
 	@Autowired
-	private VendasRepository vendasRepository;
-	
-	@Autowired
-	private EstoqueRepository estoqueRepository;
-	
-	@Autowired
-	private ProdutoRepository produtoRepository;
-	
-	@Autowired
-	private FornecedorRepository fornecedorRepository;
-	
-	
+	public VendasController(VendasService vendasService) {
+		this.vendasService = vendasService;
+	}
+
 	@GetMapping("Cadastro")
 	public ModelAndView cadastro() {
-		ModelAndView mv = new ModelAndView("Home/Vendas/Cadastro");
-		mv.addObject("vendasobj", new Vendas());
-		mv.addObject("vendas", vendasRepository.ListarVendas());
-		mv.addObject("estoque", estoqueRepository.ListarEstoque());
+		ModelAndView mv = vendasService.cadastrarVenda();
 		return mv;
 	}
 	
 	@GetMapping("ListarVendas")
 	public ModelAndView ListarVendas() {
-		ModelAndView mv = new ModelAndView("Home/Vendas/ListarVendas");
-		mv.addObject("vendas", vendasRepository.ListarVendas());
+		ModelAndView mv = vendasService.ListarVenda();
 		return mv;
 	}
 	
 	@PostMapping("Salvar")
 	public ModelAndView salvar(Vendas venda ,RedirectAttributes ra) {
-		Long total = vendasRepository.totalVendas();
-		String codVenda = "VEN" + LocalDate.now().getYear() + total;
-		
-		venda.setCodVenda(codVenda);
-		venda.setDeletado(false);	
-		venda.setValorVenda((venda.getValorVenda() * venda.getQuantidade()));
-		Vendas v = vendasRepository.save(venda);
-			
-		Estoque estoque = estoqueRepository.buscarPorId(v.getEstoque().getId());
-		estoque.setQuantidade((estoque.getQuantidade()-venda.getQuantidade()));
-		estoqueRepository.save(estoque);
-		
-		ra.addFlashAttribute("msg", "Venda Efetuada com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Vendas/ListarVendas");
-		return mv;		
+		ModelAndView mv = vendasService.SalvarVenda(venda, ra);
+		return mv;
 	}
-		
-	
+			
 	@GetMapping("Deletar/{idVendas}")
 	public ModelAndView deletar(@PathVariable("idVendas") Long idVendas, RedirectAttributes ra) {
-		Vendas vendas = vendasRepository.buscarPorId(idVendas);
-		Estoque estoque = estoqueRepository.buscarPorId(vendas.getEstoque().getId());
-		estoque.setQuantidade((estoque.getQuantidade() + vendas.getQuantidade()));
-	    estoqueRepository.save(estoque);
-	    
-		vendas.setDeletado(true);
-		vendasRepository.save(vendas);
-		ra.addFlashAttribute("msg", "Item deletado com Sucesso");		
-		ModelAndView mv = new ModelAndView("redirect:/Home/Vendas/ListarVendas");
+		ModelAndView mv = vendasService.DeletarVenda(idVendas, ra);
 		return mv;
 	}
 	
 	@GetMapping("Relatorio")
 	public ModelAndView Relatorio() {
-		List<String> listafornecedores = fornecedorRepository.ListadeProdutosSemEstoque();
-		List<String> listaprodutos = produtoRepository.ListadeProdutosSemEstoque();
-		List<Object[]> categorias = estoqueRepository.buscarCategoriaComEstoque();
-		List<CategoriaDto> categoriaDto = new ArrayList<CategoriaDto>();
-		for (Object[] categoria : categorias) {
-			CategoriaDto c = new CategoriaDto();
-			c.setNome(categoria[0].toString());
-			c.setQtdEstoque(categoria[1].toString());
-			categoriaDto.add(c);
-		}
-		
-		ModelAndView mv = new ModelAndView("Home/Vendas/Relatorio");
-		mv.addObject("categorias", categoriaDto);
-		mv.addObject("produtos", listaprodutos);
-		mv.addObject("fornecedores", listafornecedores);
+		ModelAndView mv = vendasService.RelatorioVenda();
 		return mv;
 	}
 	

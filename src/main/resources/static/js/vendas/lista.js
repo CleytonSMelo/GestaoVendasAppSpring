@@ -48,8 +48,13 @@ function verificarQtd(){
 }
 
 $("#quantidadeselecionado").keyup(function(event) {
-	if($(this).val() == 0 || $("#quantidade").val() == "0" || $(this).val() > $("#quantidade").val()){
+	if($(this).val() == 0 || $("#quantidade").val() == "0"){
 		$("#btnAdd").attr('disabled', true);
+		$(this).val("");
+	}else if($(this).val() > $("#quantidade").val()){
+		$("#btnAdd").attr('disabled', true);
+		alert("Quantidade selecionada e superior a quantidade disponivel em estoque.");
+		$(this).val("");
 	}else{
 		$("#btnAdd").attr('disabled', false);
 	}

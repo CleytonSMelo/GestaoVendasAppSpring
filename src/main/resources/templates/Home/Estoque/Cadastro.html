@@ -69,15 +69,16 @@
 									class="form-control" id="valorCompra" placeholder="0" value="" readonly="readonly">
 							</div>
 							
-							<div class="form-group col-md-1">
-								<label for="inputNome">Quantidade </label> <input type="text"
-									class="form-control" id="quantidade" placeholder="0" name="quantidade" th:field="*{Quantidade}" required="required" th:onkeypress="return somenteNumeros(event)">
-							</div>
-							
 							<div class="form-group col-md-2">
 								<label for="inputNome">Valor de Venda </label> <input type="text" onkeypress="return keypressed2( this , event );"
 									class="form-control" id="valorVenda" placeholder="0.0" name="valorVenda" th:field="*{ValorVenda}" required="required">
 							</div> 
+							
+							<div class="form-group col-md-1">
+								<label for="inputNome">Quantidade </label> <input type="text"
+									class="form-control" id="quantidade" placeholder="0" name="quantidade" th:field="*{Quantidade}" required="required" th:onkeypress="return somenteNumeros(event)">
+							</div>
+														
 						</div>	
 
                          

@@ -9,31 +9,22 @@ import org.springframework.web.servlet.ModelAndView;
 import com.appspring.appspring.repository.EstoqueRepository;
 import com.appspring.appspring.repository.FornecedorRepository;
 import com.appspring.appspring.repository.VendasRepository;
+import com.appspring.appspring.service.IndexService;
 
 @Controller
 @RequestMapping("/")
 public class IndexController {
-	
+
+	private final IndexService indexService;
+
 	@Autowired
-	private VendasRepository vendasRepository;
-	
-	@Autowired
-	private EstoqueRepository estoqueRepository;
-	
-	@Autowired
-	private FornecedorRepository fornecedorRepository;
+	public IndexController(IndexService indexService) {
+		this.indexService = indexService;
+	}
 	
 	@GetMapping("/")
 	public ModelAndView index() {
-		Long qtd = estoqueRepository.QuantidadedeProdutosRegistrado();
-		if (qtd == null) {
-			int qtdAux = 0;
-			qtd = Long.valueOf(qtdAux);
-		}
-		ModelAndView mv = new ModelAndView("Home/Dashboard/index");
-		mv.addObject("totalVendas", vendasRepository.totalVendas());
-		mv.addObject("totalFornecedores", fornecedorRepository.TotalFornecedoresRegistrado());
-		mv.addObject("produtoemEstoque", qtd);
+		ModelAndView mv = indexService.index();
 		return mv;
 	}
 }
